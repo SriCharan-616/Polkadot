@@ -4,16 +4,21 @@
     "private": true,
     "homepage": "./",
     "dependencies": {
+        "@polkadot/extension-dapp": "^0.46.0",
+        "assert": "^2.1.0",
+        "bootstrap": "^5.2.3",
+        "buffer": "^6.0.3",
+        "circomlibjs": "^0.1.7",
+        "ethers": "^6.4.0",
+        "private-dao-voting": "file:..",
+        "process": "^0.11.10",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-router-dom": "^6.8.0",
         "react-scripts": "5.0.1",
-        "ethers": "^6.4.0",
-        "snarkjs": "^0.7.0",
-        "circomlibjs": "^0.1.7",
         "recharts": "^2.5.0",
-        "bootstrap": "^5.2.3",
-        "@polkadot/extension-dapp": "^0.46.0"
+        "snarkjs": "^0.7.0",
+        "stream-browserify": "^3.0.0"
     },
     "scripts": {
         "start": "react-scripts start",

@@ -1,17 +1,12 @@
-/**
- * Smart Contract Interaction Utilities
- * Uses ethers.js v6 for blockchain interaction
- */
-
+/* global BigInt */
 import { ethers } from "ethers";
+import PrivateVotingABI from "../contracts/PrivateVoting.json";
+import ChaumPedersenABI from "../contracts/ChaumPedersen.json";
+import VerifierABI from "../contracts/Verifier.json";
 
 const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS;
 const RPC_URL = process.env.REACT_APP_RPC_URL;
 
-// ABI will be imported from compiled artifacts
-import PrivateVotingABI from "../contracts/PrivateVoting.json";
-import ChaumPedersenABI from "../contracts/ChaumPedersen.json";
-import VerifierABI from "../contracts/Verifier.json";
 
 /**
  * Get ethers provider

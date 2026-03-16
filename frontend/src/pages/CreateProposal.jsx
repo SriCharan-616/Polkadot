@@ -6,7 +6,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { createProposal } from "../utils/contract";
-
+import { ethers } from "ethers";
 const CreateProposal = () => {
     const [description, setDescription] = useState("");
     const [options, setOptions] = useState(["", ""]);

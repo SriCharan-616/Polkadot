@@ -1,8 +1,4 @@
-/**
- * Vote Page
- * Allows users to vote on a specific proposal
- */
-
+/* global BigInt */
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getProposal, castVote } from "../utils/contract";

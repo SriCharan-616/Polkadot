@@ -1,6 +1,4 @@
-/**
- * Frontend index and entry point
- */
+import "../src/utils/polyfill";
 
 import React from "react";
 import ReactDOM from "react-dom/client";

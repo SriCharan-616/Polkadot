@@ -1,7 +1,4 @@
-/**
- * Nullifier Computation for Vote Privacy
- * Uses Poseidon hash from circomlibjs
- */
+/* global BigInt */
 
 import { buildPoseidon } from "circomlibjs";
 

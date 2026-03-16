@@ -1,8 +1,4 @@
-/**
- * ElGamal Encryption Utilities for Private Voting
- * Uses BigInt for all arithmetic
- */
-
+/* global BigInt */
 const FIELD_MODULUS = 21888242871839275222246405745257275088548364400416034343698204186575808495617n;
 const GENERATOR_G = 5n;
 const MAX_WEIGHT = 10000;
