@@ -1,0 +1,31 @@
+{
+  "name": "polkadot-private-voting",
+  "version": "1.0.0",
+  "description": "Private DAO voting system on Polkadot PVM (pallet-revive)",
+  "main": "index.js",
+  "scripts": {
+    "test": "hardhat test",
+    "compile": "hardhat compile",
+    "deploy": "hardhat run scripts/deploy.js",
+    "deploy:testnet": "hardhat run scripts/deploy.js --network paseo-asset-hub"
+  },
+  "keywords": [
+    "polkadot",
+    "voting",
+    "privacy",
+    "zk-proof",
+    "elgamal",
+    "homomorphic-encryption"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ethers": "^3.0.5",
+    "hardhat": "^2.19.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "ethers": "^6.0.0",
+    "snarkjs": "^0.5.0"
+  }
+}

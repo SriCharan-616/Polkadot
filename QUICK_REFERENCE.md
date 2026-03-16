@@ -1,22 +1,182 @@
-# Quick Reference: Testing ZK & Blockchain
+# 🚀 Deployment Quick Reference Card
 
-## 🚀 Start Services (3 terminals)
+## **What You'll Build**
+
+A private voting system where:
+- 🗳️ Voters cast encrypted votes
+- 🔐 Results stay private until revealed
+- ✅ ZK proofs verify eligibility without revealing identity
+- 🔑 3 keyholders control result decryption (2-of-3 needed)
+
+---
+
+## **Total Setup Time: ~30-45 minutes**
+
+| Step | Task | Time | Command |
+|------|------|------|---------|
+| 1 | Install NPM packages | 5 min | `npm install --legacy-peer-deps` |
+| 2 | Generate Verifier | 10 min | `npx snarkjs ...` (see below) |
+| 3 | Compile Contracts | 2 min | `npx hardhat compile` |
+| 4 | Configure Wallet | 5 min | Update `.env` |
+| 5 | Deploy Contracts | 5 min | `npx hardhat run scripts/deploy.js...` |
+| 6 | Start Frontend | 2 min | `npm run dev` |
+| 7 | Test & Verify | 6 min | Open browser, create proposal |
+
+---
+
+## **Copy-Paste Command Sequence**
 
 ```powershell
-# Terminal 1: Backend
-cd backend
-npm install
-npm start
+# Navigate to project
+cd "c:\Users\Dell\Desktop\New_folder\Polkadot"
 
-# Terminal 2: Frontend
+# STEP 1: Install dependencies (5 min)
+npm install --legacy-peer-deps
 cd frontend
-npm install
+npm install --legacy-peer-deps
+cd ..
+
+# STEP 2: Generate Groth16 Verifier (10 min - 5 commands)
+npx circom circuits/vote.circom --r1cs --wasm
+npx snarkjs groth16 setup circuits/vote.r1cs circuits/pot12_final.ptau circuits/vote_0000.zkey
+npx snarkjs zkey contribute circuits/vote_0000.zkey circuits/vote_final.zkey --name="Contribution" -v
+npx snarkjs zkey export solidityverifier circuits/vote_final.zkey contracts/Verifier.sol
+npx snarkjs zkey export vkey circuits/vote_final.zkey circuits/vote_verification_key.json
+
+# STEP 3: Compile contracts (2 min)
+npx hardhat compile
+
+# STEP 4: Edit .env file (before deployment)
+# - Set DEPLOYER_PRIVATE_KEY = your test account key (0x...)
+# - Set KEYHOLDER_0, 1, 2 = addresses
+# - Other values already set
+
+# STEP 5: Deploy to Paseo testnet (5 min)
+npx hardhat run scripts/deploy.js --network paseo-asset-hub
+
+# STEP 6: Update .env with contract addresses from output
+# - PrivateVoting → REACT_APP_CONTRACT_ADDRESS
+# - Verifier → REACT_APP_VERIFIER_ADDRESS  
+# - ChaumPedersen → REACT_APP_CHAUM_PEDERSEN_ADDRESS
+
+# STEP 7: Run frontend (2 min)
+cd frontend
 npm run dev
 
-# Terminal 3: Tests (optional)
-cd backend
-npm run test:integration
+# Browser: http://localhost:5173
 ```
+
+---
+
+## **Installed Dependencies**
+
+```
+✅ hardhat          - Smart contract development
+✅ ethers.js        - Web3 library
+✅ snarkjs          - ZK proof generation
+✅ circom           - Circuit compiler
+✅ react/vite       - Frontend framework
+✅ recharts         - Charting library
+```
+
+---
+
+## **Pre-Requisites**
+
+```
+☐ Node.js 16+ (check: node --version)
+☐ npm 8+ (check: npm --version)
+☐ 5GB free disk space
+☐ Internet connection
+☐ Test account with Paseo testnet tokens
+☐ MetaMask/wallet for Paseo Asset Hub:
+  RPC: https://asset-hub-paseo-rpc.polkadot.io
+  Chain ID: 420420421
+```
+
+---
+
+## **Files Generated**
+
+```
+After snarkjs:
+  → circuits/vote.r1cs, vote.wasm
+  → circuits/vote_final.zkey
+  → contracts/Verifier.sol (POPULATED)
+
+After hardhat:
+  → artifacts/ (contract ABIs)
+
+After deployment:
+  → deployments.json (contract addresses)
+```
+
+---
+
+## **Frontend URLs**
+
+Once at http://localhost:5173:
+
+| Page | URL |
+|------|-----|
+| Proposals | `/proposals` |
+| Create | `/create` |
+| Vote | `/vote/:id` |
+| Results | `/result/:id` |
+
+---
+
+## **Quick Test**
+
+1. Open http://localhost:5173
+2. Create Proposal → Fill in details
+3. Click Vote → Follow 5-step flow
+4. View Results → See voting distribution
+
+---
+
+## **Troubleshooting**
+
+| Error | Fix |
+|-------|-----|
+| `npm install` fails | `npm cache clean --force && npm install --legacy-peer-deps` |
+| `circom` not found | `npm install -g circom` |
+| Port in use | `npm run dev -- --port 3000` |
+| Contract not found | Check REACT_APP_CONTRACT_ADDRESS |
+
+---
+
+## **Security Notes**
+
+❌ Never use mainnet accounts  
+❌ Don't commit `.env` to git  
+✅ Use test accounts only  
+✅ Store keys encrypted  
+
+---
+
+## **Documentation**
+
+- **SETUP_STATUS.md** - Full setup guide with status
+- **QUICK_START.md** - Detailed step-by-step
+- **VERIFY_SETUP.md** - Pre-deployment checklist
+- **IMPLEMENTATION_GUIDE.md** - Architecture details
+
+---
+
+## **Next Step**
+
+👉 Run the **Copy-Paste Command Sequence** above!
+
+**Windows PowerShell:**
+```powershell
+cd "c:\Users\Dell\Desktop\New_folder\Polkadot"
+npm install --legacy-peer-deps
+```
+
+---
+
+**Estimated Time: 30-45 minutes | Ready? START! 🚀**
 
 **Expected:**
 - Backend: `Server running on http://localhost:5000`
