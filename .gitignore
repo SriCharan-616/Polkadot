@@ -1,0 +1,48 @@
+node_modules/
+.env
+.env.local
+.env.*.local
+
+# Frontend
+.next/
+out/
+build/
+dist/
+.vercel
+.turbo
+
+# Backend
+*.db
+*.db-journal
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Misc
+*.pem
+.cache/
+Thumbs.db
+.AppleDouble
+.LSOverride
+
+# Package managers
+yarn.lock
+pnpm-lock.yaml
+package-lock.json
+
+# Circuit artifacts
+circuits/build/
+circuits/*.zkey
+circuits/pot*/
+
+# Testing
+test-results/
+.nyc_output/
+coverage/
